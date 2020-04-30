@@ -2,6 +2,10 @@
 
 Python module for handling git easy.
 
+## Features
+
+* **<span style="color:red">Smart git fetch</span>**
+
 **Only Python 3**
 
 **Module can be accessed using both `eg` and `egit` commands**
