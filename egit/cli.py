@@ -66,7 +66,7 @@ def main():
     elif args.a:
         bad('>>> Git Add -A')
         git_add()
-        # git_status()
+        git_status()
 
     # git commit
     elif args.comment is not None and args.c:

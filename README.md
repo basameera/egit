@@ -14,8 +14,9 @@ usage:
   egit -a               : Git Add -A
   egit -c comment       : Git Commit -m comment
   egit -p               : Git Push
+  egit -u               : Git Pull
 
-Easy Git
+Easy Git | 2020 Sameera Sandaruwan
 
 positional arguments:
   comment
@@ -25,6 +26,7 @@ optional arguments:
   -a          Git Add -A
   -c          Git Commit -m comment
   -p          Git Push
+  -u          Git Pull
 ```
 
 ## Install
@@ -34,4 +36,4 @@ optional arguments:
 
 ## To Do
 
-* Git pull
+* Smart Git pull
