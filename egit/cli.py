@@ -51,7 +51,7 @@ def main():
 
     # git add, commit, push
     if args.comment is not None and args.a is False and args.c is False and args.p is False:
-        bad('>>> Git Push "{}"'.format(args.comment))
+        bad('>>> Git All "{}"'.format(args.comment))
         git_add()
         git_commit(args.comment)
         git_push()
