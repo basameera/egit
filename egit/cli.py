@@ -1,6 +1,18 @@
 import argparse
 from .utils import good, bad
 import os
+import subprocess
+
+
+def sp_result(cmd):
+    cmd_list = cmd.split(' ')
+    res = subprocess.run(cmd_list, stdout=subprocess.PIPE)
+    return res.stdout.decode('utf-8').replace('\n', '')
+
+
+def git_fetch():
+    # fetch is slow. so do it less
+    os.system('git fetch -q')
 
 
 def git_status():
@@ -22,9 +34,11 @@ def git_push():
     good('>> Git Push')
     os.system('git push')
 
+
 def git_pull():
     good('>> Git Pull')
     os.system('git pull')
+
 
 def main():
     # create argument parser object
@@ -51,7 +65,13 @@ def main():
     # parse the arguments from standard input
     args = parser.parse_args()
 
-    # print(args.__dict__)
+    # git fetch
+    git_fetch()
+
+    UPSTREAM = r'@{u}'
+    LOCAL = sp_result('git rev-parse @')
+    REMOTE = sp_result('git rev-parse {}'.format(UPSTREAM))
+    BASE = sp_result('git merge-base @ {}'.format((UPSTREAM)))
 
     # git add, commit, push
     if args.comment is not None and args.a is False and args.c is False and args.p is False:

@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     # git fetch
 
-    git_fetch()
+    # git_fetch()
 
     UPSTREAM = r'@{u}'
     LOCAL = sp_result('git rev-parse @')

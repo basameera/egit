@@ -6,7 +6,7 @@ Python module for handling git easy.
 
 **Module can be accessed using both `eg` and `egit` commands**
 
-```bash
+``` bash
 $ eg -h
 usage: 
   egit                  : Git status
@@ -30,20 +30,30 @@ optional arguments:
 ```
 
 ## Install
-1. Clone this repo. (`git clone https://github.com/basameera/egit.git`)
-1. `cd egit`
-1. `pip install .`
 
-## To Do
+1. Clone this repo. ( `git clone https://github.com/basameera/egit.git` )
+1. `cd egit` 
+1. `pip install .` 
 
-* Smart Git pull
+**Git fetch**
 
-test
+``` 
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse "$UPSTREAM")
+BASE=$(git merge-base @ "$UPSTREAM")
 
-test 2
+echo LOCAL : $LOCAL
+echo REMOTE: $REMOTE
+echo BASE : $BASE
 
-3
-
-4
-
-5
+if [ $LOCAL = $REMOTE ]; then
+    echo "Up-to-date"
+elif [ $LOCAL = $BASE ]; then
+    echo "Need to pull"
+elif [ $REMOTE = $BASE ]; then
+    echo "Need to push"
+else
+    echo "Diverged"
+fi
+```
