@@ -34,7 +34,7 @@ def main():
         '  egit -p\t\t: Git Push\n'
 
     parser = argparse.ArgumentParser(
-        description="Easy Git", usage=custom_usage)
+        description="Easy Git | 2020 Sameera Sandaruwan", usage=custom_usage)
 
     # parser.add_argument("-a", type=str, metavar="", default=None, help="Git Add")
 
