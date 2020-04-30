@@ -1,5 +1,7 @@
 # egit
 
+Python module for handling git easy.
+
 ## To Do
 
 * How to use git from anywhere for a target folder
