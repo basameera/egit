@@ -16,7 +16,7 @@ def git_add():
 
 def git_commit(msg):
     good('>> Git Commit')
-    os.system('git commit -m {}'.format(msg))
+    os.system('git commit -m "{}"'.format(msg))
 
 
 def git_push():
@@ -65,9 +65,9 @@ def main():
 
     # git commit
     elif args.comment is not None and args.c:
-        bad('>>> Git Commit -m {}'.format(args.comment))
+        bad('>>> Git Commit -m "{}"'.format(args.comment))
         git_commit(args.comment)
-        git_status()
+        # git_status()
 
     # git push
     elif args.a:
