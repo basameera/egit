@@ -70,7 +70,7 @@ def main():
         # git_status()
 
     # git push
-    elif args.a:
+    elif args.p:
         bad('>>> Git Push')
         git_push()
         git_status()
