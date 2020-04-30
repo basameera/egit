@@ -73,39 +73,48 @@ def main():
     REMOTE = sp_result('git rev-parse {}'.format(UPSTREAM))
     BASE = sp_result('git merge-base @ {}'.format((UPSTREAM)))
 
-    # git add, commit, push
-    if args.comment is not None and args.a is False and args.c is False and args.p is False:
-        bad('>>> Git All "{}"'.format(args.comment))
-        git_add()
-        git_commit(args.comment)
-        git_push()
-        git_status()
+    # Up-to-date
+    if LOCAL == REMOTE:
 
-    # git add
-    elif args.a:
-        bad('>>> Git Add -A')
-        git_add()
-        git_status()
+        # git add, commit, push
+        if args.comment is not None and args.a is False and args.c is False and args.p is False:
+            bad('>>> Git All "{}"'.format(args.comment))
+            git_add()
+            git_commit(args.comment)
+            git_push()
+            git_status()
 
-    # git commit
-    elif args.comment is not None and args.c:
-        bad('>>> Git Commit -m "{}"'.format(args.comment))
-        git_commit(args.comment)
-        # git_status()
+        # git add
+        elif args.a:
+            bad('>>> Git Add -A')
+            git_add()
+            git_status()
 
-    # git push
-    elif args.p:
-        git_push()
-        git_status()
+        # git commit
+        elif args.comment is not None and args.c:
+            bad('>>> Git Commit -m "{}"'.format(args.comment))
+            git_commit(args.comment)
+            # git_status()
 
-    # git pull
-    elif args.u:
-        git_pull()
-        # git_status()
+        # git push
+        elif args.p:
+            git_push()
+            git_status()
 
-    else:
-        git_status()
+        # git pull
+        elif args.u:
+            git_pull()
+            # git_status()
 
+        else:
+            git_status()
+
+    elif LOCAL == BASE:
+        bad("*** Need to pull ***")
+
+        # git pull
+        if args.u:
+            git_pull()
 
 if __name__ == "__main__":
     main()
