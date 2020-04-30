@@ -1,7 +1,6 @@
 import argparse
 from .utils import good, bad
 import os
-import sys
 
 
 def git_status():
