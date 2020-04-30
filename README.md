@@ -31,3 +31,7 @@ optional arguments:
 1. Clone this repo. (`git clone https://github.com/basameera/egit.git`)
 1. `cd egit`
 1. `pip install .`
+
+## To Do
+
+* Git pull

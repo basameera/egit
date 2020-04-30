@@ -23,6 +23,9 @@ def git_push():
     good('>> Git Push')
     os.system('git push')
 
+def git_pull():
+    good('>> Git Pull')
+    os.system('git pull')
 
 def main():
     # create argument parser object
@@ -31,7 +34,8 @@ def main():
         '  egit comment\t\t: Git add, commit (with "comment") and push\n' + \
         '  egit -a\t\t: Git Add -A\n' + \
         '  egit -c comment\t: Git Commit -m comment\n' + \
-        '  egit -p\t\t: Git Push\n'
+        '  egit -p\t\t: Git Push\n' + \
+        '  egit -u\t\t: Git Pull\n'
 
     parser = argparse.ArgumentParser(
         description="Easy Git | 2020 Sameera Sandaruwan", usage=custom_usage)
@@ -42,6 +46,7 @@ def main():
     parser.add_argument('-c', action='store_true',
                         help="Git Commit -m comment")
     parser.add_argument('-p', action='store_true', help="Git Push")
+    parser.add_argument('-u', action='store_true', help="Git Pull")
 
     parser.add_argument('comment', nargs='?', default=None)
     # parse the arguments from standard input
@@ -61,7 +66,7 @@ def main():
     elif args.a:
         bad('>>> Git Add -A')
         git_add()
-        git_status()
+        # git_status()
 
     # git commit
     elif args.comment is not None and args.c:
@@ -71,9 +76,13 @@ def main():
 
     # git push
     elif args.p:
-        bad('>>> Git Push')
         git_push()
         git_status()
+
+    # git pull
+    elif args.u:
+        git_pull()
+        # git_status()
 
     else:
         git_status()
