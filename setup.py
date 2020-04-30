@@ -27,6 +27,7 @@ setup(
     entry_points={
         "console_scripts": [
             "egit=egit.cli:main",
+            "eg=egit.cli:main",
         ]
     },
 )
