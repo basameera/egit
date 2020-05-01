@@ -1,5 +1,6 @@
 import argparse
 from .utils import good, bad
+from .vsr import VERSION
 import os
 import subprocess
 
@@ -57,7 +58,7 @@ def main():
         '  egit -b <branch name>\t: Change branch\n'
 
     parser = argparse.ArgumentParser(
-        description="Easy Git | 2020 Sameera Sandaruwan", usage=custom_usage)
+        description="Easy Git - {} | 2020 Sameera Sandaruwan".format(VERSION), usage=custom_usage)
 
     parser.add_argument('-a', action='store_true', help="Git Add -A")
     parser.add_argument('-c', action='store_true',

@@ -1,4 +1,5 @@
 from setuptools import setup
+from egit import __version__, __author__, __author_email__
 
 def readme():
     with open('README.md') as f:
@@ -8,13 +9,13 @@ def readme():
 
 setup(
     name="egit",
-    version="0.0.2",
+    version=__version__,
     description="Python Easy Git",
     long_description=readme(),
     long_description_content_type="text/markdown",
     url="https://github.com/basameera/egit",
-    author="Sameera Sandaruwan",
-    author_email="basameera@protonmail.com",
+    author=__author__,
+    author_email=__author_email__,
     license="MIT",
     classifiers=[
         "License :: OSI Approved :: MIT License",
