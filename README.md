@@ -19,6 +19,7 @@ usage:
   egit -c comment       : Git Commit -m comment
   egit -p               : Git Push
   egit -u               : Git Pull
+  egit -b <branch name> : Change branch
 
 Easy Git | 2020 Sameera Sandaruwan
 
@@ -31,6 +32,7 @@ optional arguments:
   -c          Git Commit -m comment
   -p          Git Push
   -u          Git Pull
+  -b          Change branch
 ```
 
 ## Install

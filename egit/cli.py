@@ -40,6 +40,11 @@ def git_pull():
     os.system('git pull')
 
 
+def git_switch_branch(msg):
+    good('>> Git Change branch')
+    os.system('git checkout "{}"'.format(msg))
+
+
 def main():
     # create argument parser object
     custom_usage = '\n' + \
@@ -48,18 +53,19 @@ def main():
         '  egit -a\t\t: Git Add -A\n' + \
         '  egit -c comment\t: Git Commit -m comment\n' + \
         '  egit -p\t\t: Git Push\n' + \
-        '  egit -u\t\t: Git Pull\n'
+        '  egit -u\t\t: Git Pull\n' + \
+        '  egit -b <branch name>\t: Change branch\n'
 
     parser = argparse.ArgumentParser(
         description="Easy Git | 2020 Sameera Sandaruwan", usage=custom_usage)
-
-    # parser.add_argument("-a", type=str, metavar="", default=None, help="Git Add")
 
     parser.add_argument('-a', action='store_true', help="Git Add -A")
     parser.add_argument('-c', action='store_true',
                         help="Git Commit -m comment")
     parser.add_argument('-p', action='store_true', help="Git Push")
     parser.add_argument('-u', action='store_true', help="Git Pull")
+    parser.add_argument('-b', type=str, metavar="",
+                        default=None, help="Change branch")
 
     parser.add_argument('comment', nargs='?', default=None)
     # parse the arguments from standard input
@@ -77,7 +83,7 @@ def main():
     if LOCAL == REMOTE:
 
         # git add, commit, push
-        if args.comment is not None and args.a is False and args.c is False and args.p is False:
+        if args.comment is not None and args.a is False and args.c is False and args.p is False and args.u is False:
             bad('>>> Git All "{}"'.format(args.comment))
             git_add()
             git_commit(args.comment)
@@ -106,6 +112,10 @@ def main():
             git_pull()
             # git_status()
 
+        # git checkout <branch>
+        elif args.b is not None:
+            git_switch_branch(args.b)
+
         else:
             git_status()
 
@@ -115,6 +125,7 @@ def main():
         # git pull
         if args.u:
             git_pull()
+
 
 if __name__ == "__main__":
     main()
