@@ -127,6 +127,9 @@ def main():
         if args.u:
             git_pull()
 
+    elif REMOTE == BASE:
+        bad("*** Need to push ***")
+
 
 if __name__ == "__main__":
     main()
