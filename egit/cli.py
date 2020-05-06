@@ -130,6 +130,11 @@ def main():
     elif REMOTE == BASE:
         bad("*** Need to push ***")
 
+        # git push
+        if args.p:
+            git_push()
+            git_status()
+
 
 if __name__ == "__main__":
     main()
