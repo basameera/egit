@@ -21,7 +21,7 @@ usage:
   egit -u               : Git Pull
   egit -b <branch name> : Change branch
 
-Easy Git | 2020 Sameera Sandaruwan
+Easy Git - 0.1.1 | 2020 Sameera Sandaruwan
 
 positional arguments:
   comment
@@ -33,6 +33,7 @@ optional arguments:
   -p          Git Push
   -u          Git Pull
   -b          Change branch
+  -s          git-credential-cache for 3 hours
 ```
 
 ## Install

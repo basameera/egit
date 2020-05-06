@@ -36,6 +36,11 @@ def git_push():
     os.system('git push')
 
 
+def git_cache_cred():
+    good('>> Git cache credential')
+    os.system("git config credential.helper 'cache --timeout=7200'")
+
+
 def git_pull():
     good('>> Git Pull')
     os.system('git pull')
@@ -67,10 +72,17 @@ def main():
     parser.add_argument('-u', action='store_true', help="Git Pull")
     parser.add_argument('-b', type=str, metavar="",
                         default=None, help="Change branch")
+    parser.add_argument('-s', action='store_true',
+                        help="git-credential-cache for 3 hours")
+    # https://git-scm.com/docs/git-credential-cache
 
     parser.add_argument('comment', nargs='?', default=None)
     # parse the arguments from standard input
     args = parser.parse_args()
+
+    # git-credential-cache
+    if args.s:
+        git_cache_cred()
 
     # git fetch
     git_fetch()
