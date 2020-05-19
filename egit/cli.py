@@ -61,6 +61,8 @@ def main():
         '  egit -p\t\t: Git Push\n' + \
         '  egit -u\t\t: Git Pull\n' + \
         '  egit -b <branch name>\t: Change branch\n'
+    
+    custom_usage = None
 
     parser = argparse.ArgumentParser(
         description="Easy Git - {} | 2020 Sameera Sandaruwan".format(VERSION), usage=custom_usage)
