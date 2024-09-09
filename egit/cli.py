@@ -50,6 +50,33 @@ def git_switch_branch(msg):
     good('>> Git Change branch')
     os.system('git checkout "{}"'.format(msg))
 
+def git_setup_cred(username, email, token):
+    bad('\n>> Before')
+    os.system('cat .git/config')
+
+    info = 'git config user.name "<username>"\n' + \
+    'git config user.email <email address>\n' + \
+    'git remote rm origin\n' + \
+    'git remote add origin https://<username>:<access_token>@<git remote link>\n' + \
+    'git push --set-upstream origin <branch name>'
+
+    # get branch name
+    branch_name = sp_result("git rev-parse --abbrev-ref HEAD")
+    
+    # get remote link
+    remote_link = sp_result("git remote get-url origin").split('://')[1]
+
+    print()
+    os.system('git config user.name "{}"'.format(username))
+    os.system('git config user.email {}'.format(email))
+    os.system('git remote rm origin')
+    os.system('git remote add origin https://{}:{}@{}'.format(username, token, remote_link))
+    os.system('git push --set-upstream origin {}'.format(branch_name))
+
+    good('\n>> After')
+    os.system('cat .git/config')
+
+    
 
 def main():
     # create argument parser object
@@ -60,12 +87,13 @@ def main():
         '  egit -c comment\t: Git Commit -m comment\n' + \
         '  egit -p\t\t: Git Push\n' + \
         '  egit -u\t\t: Git Pull\n' + \
-        '  egit -b <branch name>\t: Change branch\n'
+        '  egit -b <branch name>\t: Change branch\n' + \
+        '  egit -z <username> <email> <github token>\t: Setup Credentials\n'
     
     custom_usage = None
 
     parser = argparse.ArgumentParser(
-        description="Easy Git - {} | 2020 Sameera Sandaruwan".format(VERSION), usage=custom_usage)
+        description="Easy Git - {} | 2024 Sameera Sandaruwan".format(VERSION), usage=custom_usage)
 
     parser.add_argument('-a', action='store_true', help="Git Add -A")
     parser.add_argument('-c', action='store_true',
@@ -77,8 +105,11 @@ def main():
     parser.add_argument('-s', action='store_true',
                         help="git-credential-cache for 3 hours")
     # https://git-scm.com/docs/git-credential-cache
+    parser.add_argument('-z', action='store_true', help="Setup Credentials | eg -z [username] [email] [token]")
 
-    parser.add_argument('comment', nargs='?', default=None)
+    parser.add_argument('comment', nargs='?', default=None, help="comment or username for -z")
+    parser.add_argument('email', nargs='?', default=None, help="email for -z")
+    parser.add_argument('token', nargs='?', default=None, help="token for -z")
     # parse the arguments from standard input
     args = parser.parse_args()
 
@@ -98,7 +129,7 @@ def main():
     if LOCAL == REMOTE:
 
         # git add, commit, push
-        if args.comment is not None and args.a is False and args.c is False and args.p is False and args.u is False:
+        if args.comment is not None and args.a is False and args.c is False and args.p is False and args.u is False and args.z is False:
             bad('>>> Git All "{}"'.format(args.comment))
             git_add()
             git_commit(args.comment)
@@ -130,6 +161,18 @@ def main():
         # git checkout <branch>
         elif args.b is not None:
             git_switch_branch(args.b)
+
+        # git setup credentials
+        elif args.z:
+            # git_push()
+            # git_status()
+            if args.comment is not None and args.email is not None and args.token is not None:
+                z_username = args.comment
+                z_email = args.email
+                z_token = args.token
+                git_setup_cred(z_username, z_email, z_token)
+            else:
+                bad("> Not enough Arguments. Need <username> <email> <token>")
 
         else:
             git_status()
